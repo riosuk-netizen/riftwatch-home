@@ -101,6 +101,38 @@
     .icon svg { width: 26px; height: 26px; }
     .note { font-size: .8rem; color: #6b778a; opacity: 0; animation: rise .6s ease-out 2.9s forwards; text-align: center; }
 
+    /* ── Theme music player ──────────────────────────────────── */
+    .player { position: fixed; left: 0; right: 0; margin: 0 auto; bottom: 16px; z-index: 6;
+      width: min(720px, calc(100% - 32px)); display: flex; align-items: center; gap: 12px;
+      padding: 8px 14px 8px 8px; border-radius: 14px; border: 1px solid var(--line);
+      background: rgba(13,17,24,.88); backdrop-filter: blur(10px); box-shadow: 0 16px 40px rgba(0,0,0,.5);
+      opacity: 0; animation: rise .6s ease-out 2.8s forwards; }
+    .player[hidden] { display: none; }
+    body.skip .player { animation-delay: 0s; animation-duration: .35s; }
+    .pl-btn { width: 36px; height: 36px; flex: none; display: grid; place-items: center; padding: 0; cursor: pointer;
+      border-radius: 10px; border: 1px solid var(--line); background: var(--bg-2); color: var(--text); transition: border-color .15s, color .15s; }
+    .pl-btn:hover, .pl-btn:focus-visible { border-color: var(--accent); color: var(--accent-2); outline: none; }
+    .pl-btn svg { width: 15px; height: 15px; }
+    .pl-play { width: 42px; height: 42px; border-color: rgba(232,163,60,.55); background: rgba(232,163,60,.14); color: var(--accent-2); }
+    .pl-play.nudge { animation: nudge 1.6s ease-in-out infinite; }
+    @keyframes nudge { 50% { box-shadow: 0 0 0 6px rgba(232,163,60,.18); } }
+    .pl-play .i-pause, .player.playing .pl-play .i-play { display: none; }
+    .player.playing .pl-play .i-pause { display: block; }
+    .pl-info { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .pl-top { display: flex; justify-content: space-between; gap: 10px; font-size: .78rem; }
+    .pl-title { font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pl-time { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .pl-seek, .pl-vol { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 4px; cursor: pointer; margin: 0;
+      background: linear-gradient(var(--accent), var(--accent)) 0 / var(--fill, 0%) 100% no-repeat, #26303f; }
+    .pl-seek { width: 100%; }
+    .pl-vol { width: 90px; flex: none; }
+    .pl-seek::-webkit-slider-thumb, .pl-vol::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-2); border: 0; }
+    .pl-seek::-moz-range-thumb, .pl-vol::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--accent-2); border: 0; }
+    .pl-mute .i-off, .player.muted .pl-mute .i-on { display: none; }
+    .player.muted .pl-mute .i-off { display: block; }
+    main { padding-bottom: 110px; }
+    @media (max-width: 760px) { .pl-vol { display: none; } .player { gap: 8px; } }
+
     @keyframes pop { to { opacity: 1; transform: none; } }
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
@@ -115,7 +147,8 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .intro { display: none; }
-      .head, .card, .note { animation: none !important; opacity: 1; transform: none; }
+      .head, .card, .note, .player { animation: none !important; opacity: 1; }
+      .head, .card, .note { transform: none; }
     }
   </style>
 </head>
@@ -159,12 +192,120 @@
     <p class="note">Doctrines can take a moment to load if nobody has used them for a while.</p>
   </main>
 
+  <!-- Theme music. Put the track next to this page as theme.mp3 (or change src). -->
+  <div class="player" id="player" hidden>
+    <audio id="themeAudio" src="theme.mp3" preload="metadata" loop></audio>
+    <button type="button" class="pl-btn pl-play" id="plPlay" aria-label="Play theme">
+      <svg class="i-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9.5-5.5z" fill="currentColor"/></svg>
+      <svg class="i-pause" viewBox="0 0 16 16"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" fill="currentColor"/></svg>
+    </button>
+    <button type="button" class="pl-btn" id="plStop" aria-label="Stop">
+      <svg viewBox="0 0 16 16"><rect x="3.5" y="3.5" width="9" height="9" rx="1.5" fill="currentColor"/></svg>
+    </button>
+    <div class="pl-info">
+      <div class="pl-top"><span class="pl-title">Rift Watch Theme</span><span class="pl-time" id="plTime">0:00 / 0:00</span></div>
+      <input type="range" class="pl-seek" id="plSeek" min="0" max="1000" value="0" aria-label="Position in track">
+    </div>
+    <button type="button" class="pl-btn pl-mute" id="plMute" aria-label="Mute">
+      <svg class="i-on" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6v4h2.5l3.5 3V3L5 6z" fill="currentColor"/><path d="M11 5.5a3.5 3.5 0 0 1 0 5M12.8 3.6a6 6 0 0 1 0 8.8"/></svg>
+      <svg class="i-off" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6v4h2.5l3.5 3V3L5 6z" fill="currentColor"/><path d="m11 6 4 4M15 6l-4 4"/></svg>
+    </button>
+    <input type="range" class="pl-vol" id="plVol" min="0" max="100" value="50" aria-label="Volume">
+  </div>
+
   <script>
     // Second visit in the same session, or a click/keypress during the intro: skip it.
     try { if (sessionStorage.getItem('rwSeen')) document.body.classList.add('skip'); sessionStorage.setItem('rwSeen', '1'); } catch (e) {}
     function skip() { document.body.classList.add('skip'); }
     addEventListener('click', skip, { once: true });
     addEventListener('keydown', skip, { once: true });
+
+    // ── Theme music ────────────────────────────────────────────
+    // Browsers won't play sound until the visitor has clicked or pressed a
+    // key on the page, so: try to start straight away, and if that's
+    // blocked, start on the first click/keypress (unless they've pressed
+    // Stop before, which is remembered). Volume is remembered too.
+    (function () {
+      var a = document.getElementById('themeAudio'), bar = document.getElementById('player');
+      if (!a || !bar) return;
+      var $ = function (id) { return document.getElementById(id); };
+      var play = $('plPlay'), seek = $('plSeek'), vol = $('plVol'), time = $('plTime');
+      function get(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
+      function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+      var target = Math.min(1, Math.max(0, parseFloat(get('rwVol', '0.5'))));
+      vol.value = Math.round(target * 100);
+      a.muted = get('rwMuted', '0') === '1';
+      function fmt(t) { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
+      function fill(el) { el.style.setProperty('--fill', (el.value / el.max * 100) + '%'); }
+      function ui() {
+        bar.classList.toggle('playing', !a.paused);
+        bar.classList.toggle('muted', a.muted || target === 0);
+        play.setAttribute('aria-label', a.paused ? 'Play theme' : 'Pause');
+        if (!a.paused) play.classList.remove('nudge');
+        fill(vol);
+      }
+      function fadeIn() {                  // ease in rather than blasting out
+        a.volume = 0;
+        var t0 = performance.now();
+        (function step(now) {
+          var k = Math.min(1, (now - t0) / 1500);
+          a.volume = target * k;
+          if (k < 1 && !a.paused) requestAnimationFrame(step);
+        })(t0);
+      }
+      function start() { return a.play().then(function () { fadeIn(); set('rwMusic', 'on'); ui(); }); }
+
+      a.addEventListener('error', function () { bar.hidden = true; });          // no track uploaded yet
+      a.addEventListener('loadedmetadata', function () { bar.hidden = false; tick(); });
+      a.addEventListener('play', ui); a.addEventListener('pause', ui);
+      function tick() {
+        time.textContent = fmt(a.currentTime) + ' / ' + fmt(a.duration);
+        if (!seeking && a.duration) { seek.value = Math.round(a.currentTime / a.duration * 1000); fill(seek); }
+      }
+      a.addEventListener('timeupdate', tick);
+
+      play.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (a.paused) start().catch(function () {}); else a.pause();
+      });
+      $('plStop').addEventListener('click', function (e) {
+        e.stopPropagation();
+        a.pause(); a.currentTime = 0; set('rwMusic', 'off'); tick(); ui();
+      });
+      $('plMute').addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (target === 0) { target = 0.5; vol.value = 50; a.volume = target; a.muted = false; }
+        else a.muted = !a.muted;
+        set('rwMuted', a.muted ? '1' : '0'); set('rwVol', String(target)); ui();
+      });
+      vol.addEventListener('input', function () {
+        target = vol.value / 100; a.volume = target; a.muted = false;
+        set('rwVol', String(target)); set('rwMuted', '0'); ui();
+      });
+      var seeking = false;
+      seek.addEventListener('input', function () {
+        seeking = true; fill(seek);
+        if (a.duration) time.textContent = fmt(seek.value / 1000 * a.duration) + ' / ' + fmt(a.duration);
+      });
+      seek.addEventListener('change', function () {
+        if (a.duration) a.currentTime = seek.value / 1000 * a.duration;
+        seeking = false;
+      });
+      bar.addEventListener('click', function (e) { e.stopPropagation(); });   // using the player doesn't skip the intro
+
+      if (get('rwMusic', 'on') !== 'off') {
+        start().catch(function () {
+          play.classList.add('nudge');
+          function first(e) {
+            if (e.target.closest && e.target.closest('a, .player')) return;   // leaving the page, or using the player
+            removeEventListener('pointerdown', first, true); removeEventListener('keydown', first, true);
+            if (a.paused) start().catch(function () {});
+          }
+          addEventListener('pointerdown', first, true); addEventListener('keydown', first, true);
+        });
+      }
+      ui();
+    })();
 
     // Nudge the doctrine site awake (free Render plan sleeps after 15 minutes idle),
     // so it's ready by the time someone clicks its card.
