@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rift Watch</title>
-  <meta name="description" content="Rift Watch fleet tools: doctrines and Xar reports.">
+  <meta name="description" content="Rift Watch fleet tools: doctrines, the fleet schedule and Xar reports.">
   <meta name="theme-color" content="#e8a33c">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rift Watch">
   <meta property="og:title" content="Rift Watch">
-  <meta property="og:description" content="Fleet doctrines and Xar reports in one place.">
+  <meta property="og:description" content="Fleet doctrines, the fleet schedule and Xar reports in one place.">
   <meta property="og:url" content="https://riftwatch.onrender.com/">
   <meta property="og:image" content="https://riftwatch.onrender.com/og-banner.png">
   <meta property="og:image:alt" content="Rift Watch fleet tools">
@@ -69,7 +69,7 @@
     .eyebrow { margin-top: 14px; font-weight: 600; font-size: .9rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
     .head p { margin-top: 8px; color: var(--muted); }
 
-    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); gap: 22px; width: 100%; justify-content: center; }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 400px)); gap: 22px; width: 100%; justify-content: center; }
     .card {
       position: relative; display: flex; flex-direction: column; padding: 32px 32px 28px; min-height: 300px;
       text-decoration: none; color: var(--text); border-radius: 14px; overflow: hidden;
@@ -87,10 +87,11 @@
     }
     .card:nth-child(1) { animation-delay: 2.5s; }
     .card:nth-child(2) { animation-delay: 2.65s; }
+    .card:nth-child(3) { animation-delay: 2.8s; }
     .card:hover, .card:focus-visible { border-color: var(--accent); transform: translateY(-4px); outline: none;
       box-shadow: 0 26px 60px rgba(0,0,0,.55), 0 0 0 1px var(--accent), 0 0 40px rgba(232,163,60,.15); }
     .card .eyebrow { margin: 0; font-size: .82rem; }
-    .card h2 { margin-top: 14px; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.1rem); line-height: .98; letter-spacing: -.01em; text-transform: uppercase; }
+    .card h2 { margin-top: 14px; font-weight: 800; font-size: clamp(2.2rem, 3.4vw, 2.9rem); line-height: .98; letter-spacing: -.01em; text-transform: uppercase; }
     .bar { width: 58px; height: 5px; background: var(--accent); margin: 20px 0 18px; }
     .card p { color: var(--muted); font-size: 1.05rem; line-height: 1.5; max-width: 32ch; }
     .go { margin-top: auto; padding-top: 24px; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; color: var(--accent-2); }
@@ -99,7 +100,7 @@
     .icon { position: absolute; right: 26px; top: 26px; width: 52px; height: 52px; border-radius: 12px; display: grid; place-items: center;
       background: rgba(232,163,60,.12); border: 1px solid rgba(232,163,60,.35); color: var(--accent-2); }
     .icon svg { width: 26px; height: 26px; }
-    .note { font-size: .8rem; color: #6b778a; opacity: 0; animation: rise .6s ease-out 2.9s forwards; text-align: center; }
+    .note { font-size: .8rem; color: #6b778a; opacity: 0; animation: rise .6s ease-out 3s forwards; text-align: center; }
 
     /* ── Theme music player ──────────────────────────────────── */
     .player { position: fixed; left: 0; right: 0; margin: 0 auto; bottom: 16px; z-index: 6;
@@ -140,6 +141,9 @@
     body.skip .intro { display: none; }
     body.skip .head, body.skip .card, body.skip .note { animation-delay: 0s !important; animation-duration: .35s; }
 
+    @media (max-width: 1240px) {           /* three across gets cramped: stack them */
+      .cards { grid-template-columns: minmax(0, 460px); }
+    }
     @media (max-width: 760px) {
       .cards { grid-template-columns: minmax(0, 460px); }
       .card { min-height: 0; padding: 26px 22px 22px; }
@@ -179,6 +183,14 @@
         <p>Approved fits, required skills and one-click import into EVE.</p>
         <span class="go">Open doctrines <span>→</span></span>
       </a>
+      <a class="card" href="https://riftwatch-roam-report.onrender.com/calendar">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><path d="m9 15 2 2 4-4"/></svg></span>
+        <p class="eyebrow">Rift Watch</p>
+        <h2>Fleet<br>Schedule</h2>
+        <div class="bar"></div>
+        <p>What's on, who's flying, and one-click sign-up for every fleet.</p>
+        <span class="go">Open schedule <span>→</span></span>
+      </a>
       <a class="card" href="https://riftwatch-roam-report.onrender.com/fleets">
         <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-5 3 3 5-7"/></svg></span>
         <p class="eyebrow">Rift Watch</p>
@@ -189,7 +201,7 @@
       </a>
     </div>
 
-    <p class="note">Doctrines can take a moment to load if nobody has used them for a while.</p>
+    <p class="note">Doctrines and the schedule can take a moment to load if nobody has used them for a while.</p>
   </main>
 
   <!-- Theme music. Put the track next to this page as theme.mp3 (or change src). -->
@@ -307,9 +319,11 @@
       ui();
     })();
 
-    // Nudge the doctrine site awake (free Render plan sleeps after 15 minutes idle),
+    // Nudge the doctrine and reports sites awake (free Render plan sleeps after 15 minutes idle),
     // so it's ready by the time someone clicks its card.
-    try { fetch('https://doctrine-li9g.onrender.com/', { mode: 'no-cors', cache: 'no-store' }).catch(function () {}); } catch (e) {}
+    ['https://doctrine-li9g.onrender.com/', 'https://riftwatch-roam-report.onrender.com/'].forEach(function (u) {
+      try { fetch(u, { mode: 'no-cors', cache: 'no-store' }).catch(function () {}); } catch (e) {}
+    });
   </script>
 </body>
 </html>
