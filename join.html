@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join Rift Watch</title>
+  <meta name="description" content="Rift Watch Gaming: a casual, friendly EVE Online community. Small gang PvP, Faction Warfare and NPSI fleets. Make Rift Watch your forever home in New Eden.">
+  <meta name="theme-color" content="#e8a33c">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rift Watch">
+  <meta property="og:title" content="Join Rift Watch">
+  <meta property="og:description" content="A casual, friendly EVE Online community. Small gang PvP, Faction Warfare and NPSI. All skill levels welcome.">
+  <meta property="og:url" content="https://riftwatch.onrender.com/join.html">
+  <meta property="og:image" content="https://riftwatch.onrender.com/og-banner.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="logo-still.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07090d; --bg-2: #0d1118; --panel: #111722; --line: #222d3d;
+      --text: #eef3f8; --muted: #9aa6b8; --accent: #e8a33c; --accent-2: #f3c26e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--text); overflow-x: hidden; line-height: 1.55;
+      background:
+        radial-gradient(900px 600px at 105% -10%, rgba(232,163,60,.22), transparent 60%),
+        radial-gradient(800px 600px at -10% 40%, rgba(30,90,150,.22), transparent 60%),
+        var(--bg);
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    a { color: var(--accent-2); }
+    img { max-width: 100%; }
+
+    /* Top bar */
+    .top { position: sticky; top: 0; z-index: 10; background: rgba(7,9,13,.86); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line); }
+    .top-in { max-width: 1180px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 14px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 800;
+      letter-spacing: .2em; text-transform: uppercase; font-size: .85rem; flex: none; }
+    .brand img { width: 34px; height: 34px; border-radius: 50%; box-shadow: 0 0 0 1px var(--line); }
+    .links { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; margin-left: auto; }
+    .links::-webkit-scrollbar { display: none; }
+    .links a { color: var(--muted); text-decoration: none; font-size: .86rem; font-weight: 600; padding: 7px 10px;
+      border-radius: 8px; white-space: nowrap; }
+    .links a:hover, .links a.on { color: var(--text); background: var(--panel); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; border-radius: 10px;
+      padding: 11px 18px; border: 1px solid rgba(232,163,60,.55); background: rgba(232,163,60,.14); color: var(--accent-2);
+      transition: background .15s, border-color .15s, transform .15s; }
+    .btn:hover, .btn:focus-visible { background: rgba(232,163,60,.24); border-color: var(--accent); outline: none; transform: translateY(-1px); }
+    .btn.solid { background: var(--accent); color: #140d02; border-color: var(--accent); }
+    .btn.solid:hover { background: var(--accent-2); }
+    .btn.ghost { background: transparent; border-color: var(--line); color: var(--text); }
+    .btn.ghost:hover { border-color: var(--accent); }
+    .top .btn { padding: 8px 14px; font-size: .86rem; flex: none; }
+
+    /* Layout */
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+    section { padding: 72px 0 8px; }
+    .eyebrow { font-weight: 600; font-size: .82rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
+    h2 { margin-top: 10px; font-weight: 800; font-size: clamp(1.9rem, 4vw, 2.7rem); line-height: 1.02; letter-spacing: -.01em; text-transform: uppercase; }
+    .bar { width: 58px; height: 5px; background: var(--accent); margin: 18px 0 22px; }
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 70ch; }
+    .lead + .lead { margin-top: 12px; }
+
+    /* Panels in the card style */
+    .panel {
+      position: relative; border-radius: 14px; border: 1px solid var(--line); padding: 26px;
+      background:
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px) 0 0 / 32px 32px,
+        radial-gradient(380px 220px at 110% -20%, rgba(232,163,60,.16), transparent 65%),
+        radial-gradient(340px 220px at -20% 120%, rgba(30,90,150,.2), transparent 65%),
+        linear-gradient(160deg, #10151d, #090c11);
+      box-shadow: 0 18px 44px rgba(0,0,0,.4);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .panel.hov:hover { border-color: var(--accent); transform: translateY(-3px);
+      box-shadow: 0 22px 54px rgba(0,0,0,.5), 0 0 0 1px var(--accent), 0 0 34px rgba(232,163,60,.12); }
+    .panel h3 { font-size: 1.15rem; font-weight: 800; letter-spacing: .02em; }
+    .panel p { color: var(--muted); margin-top: 8px; }
+    .icon { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 16px;
+      background: rgba(232,163,60,.12); border: 1px solid rgba(232,163,60,.35); color: var(--accent-2); }
+    .icon svg { width: 24px; height: 24px; }
+    .grid { display: grid; gap: 18px; }
+    .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    /* Hero */
+    .hero { padding: 64px 0 24px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 40px; align-items: center; }
+    .hero h1 { margin-top: 14px; font-weight: 800; font-size: clamp(2.6rem, 7vw, 5rem); line-height: .95; letter-spacing: -.02em; text-transform: uppercase; }
+    .hero h1 span { color: var(--accent); }
+    .hero .lead { margin-top: 4px; font-size: 1.15rem; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .logo-big { justify-self: center; width: min(340px, 70vw); border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.08), 0 0 60px rgba(255,255,255,.14), 0 0 140px rgba(232,163,60,.16);
+      animation: spin-up 1.4s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes spin-up { from { transform: scale(.3) rotate(-360deg); opacity: 0; } to { transform: none; opacity: 1; } }
+    .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; font-size: .86rem; font-weight: 600;
+      border: 1px solid var(--line); background: var(--bg-2); color: var(--muted); }
+    .chip b { color: var(--text); }
+
+    /* Fleet nights */
+    .nights { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .night { padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(232,163,60,.45); background: rgba(232,163,60,.1); font-weight: 700; }
+    .night small { display: block; font-weight: 500; color: var(--muted); font-size: .8rem; }
+
+    /* Team */
+    .person { text-align: center; padding: 26px 18px; }
+    .person img { width: 112px; height: 112px; border-radius: 50%; display: block; margin: 0 auto 14px;
+      box-shadow: 0 0 0 2px var(--line), 0 0 0 5px rgba(232,163,60,.18); background: var(--bg-2); }
+    .person .role { color: var(--accent); font-weight: 700; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; margin-top: 6px; }
+    .person a.mail { display: inline-block; margin-top: 12px; font-size: .86rem; font-weight: 600; text-decoration: none; }
+
+    /* Plan */
+    .steps { counter-reset: s; }
+    .steps .panel { padding-left: 74px; }
+    .steps .panel::before { counter-increment: s; content: counter(s); position: absolute; left: 22px; top: 24px;
+      width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-weight: 800;
+      background: rgba(232,163,60,.14); border: 1px solid rgba(232,163,60,.45); color: var(--accent-2); }
+
+    /* TL;DR */
+    .tldr { list-style: none; display: grid; gap: 12px; }
+    .tldr li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 12px; border: 1px solid var(--line); background: rgba(13,17,24,.7); }
+    .tldr li::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: 8px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
+
+    /* FAQ */
+    details { border: 1px solid var(--line); border-radius: 12px; background: rgba(13,17,24,.7); transition: border-color .15s; }
+    details + details { margin-top: 10px; }
+    details[open], details:hover { border-color: rgba(232,163,60,.5); }
+    summary { cursor: pointer; list-style: none; padding: 18px 20px; font-weight: 700; display: flex; justify-content: space-between; gap: 16px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--accent); font-size: 1.3rem; line-height: 1; transition: transform .2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { padding: 0 20px 18px; color: var(--muted); }
+    details p + p { margin-top: -6px; }
+
+    /* Vacancies */
+    .vac { display: flex; flex-direction: column; }
+    .vac .tag { position: absolute; right: 18px; top: 18px; font-size: .74rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      padding: 4px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+    .vac .tag.hot { color: #140d02; background: var(--accent); border-color: var(--accent); }
+    .vac .count { margin-top: auto; padding-top: 16px; font-weight: 700; color: var(--accent-2); font-size: .92rem; }
+
+    /* Apply */
+    .apply { text-align: center; padding: 44px 24px; }
+    .apply .lead { margin: 0 auto; }
+    .apply .cta { justify-content: center; }
+    .raf { display: flex; align-items: center; gap: 18px; text-align: left; margin-top: 18px; }
+    .raf .big { flex: none; font-weight: 800; font-size: 2rem; color: var(--accent); line-height: 1; }
+
+    footer { margin-top: 72px; border-top: 1px solid var(--line); padding: 22px 16px; text-align: center; color: #6b778a; font-size: .85rem; }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
+    footer a:hover { color: var(--accent-2); }
+
+    /* Reveal on scroll */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity .6s ease-out, transform .6s ease-out; }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } .logo-big { animation: none; } html { scroll-behavior: auto; } }
+
+    @media (max-width: 960px) {
+      .g3, .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 40px; }
+      .hero .logo-big { order: -1; width: min(220px, 55vw); }
+      .hero .lead { margin-left: auto; margin-right: auto; }
+      .cta, .stats { justify-content: center; }
+      .hero .bar { margin-left: auto; margin-right: auto; }
+    }
+    @media (max-width: 640px) {
+      .g2, .g3, .g4 { grid-template-columns: minmax(0, 1fr); }
+      .links { display: none; }
+      .top .btn { margin-left: auto; }
+      section { padding-top: 56px; }
+      .panel { padding: 22px; }
+      .raf { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="#home"><img src="logo-still.png" alt="">Rift Watch</a>
+      <nav class="links" aria-label="Sections">
+        <a href="#who">Who are we?</a>
+        <a href="#about">About us</a>
+        <a href="#team">Recruitment team</a>
+        <a href="#plan">The plan</a>
+        <a href="#faq">FAQ</a>
+        <a href="#vacancies">Vacancies</a>
+      </nav>
+      <a class="btn solid" href="#apply">Apply to join</a>
+    </div>
+  </header>
+
+  <main class="wrap" id="home">
+    <!-- Hero -->
+    <div class="hero">
+      <div>
+        <p class="eyebrow">EVE Online gaming community</p>
+        <h1>Make Rift Watch your <span>forever home</span> in New Eden</h1>
+        <div class="bar"></div>
+        <p class="lead">A casual, friendly crew who fly small gang PvP, Faction Warfare and NPSI fleets together. New or veteran, if you want to play with people you actually like, you'll fit right in.</p>
+        <div class="cta">
+          <a class="btn solid" href="#apply">Apply to join →</a>
+          <a class="btn" href="https://riftwatch-roam-report.onrender.com/calendar">See the fleet schedule</a>
+        </div>
+        <div class="stats">
+          <span class="chip">Founded <b>2022</b></span>
+          <span class="chip"><b>EU</b> evenings</span>
+          <span class="chip">Fleets <b>Mon · Thu · Sun</b></span>
+          <span class="chip"><b>All</b> skill levels</span>
+        </div>
+      </div>
+      <img class="logo-big" src="logo.gif" alt="Rift Watch logo">
+    </div>
+
+    <!-- Who are we -->
+    <section id="who" class="rv">
+      <p class="eyebrow">Who are we and what are we trying to do?</p>
+      <h2>A community first,<br>a corp second</h2>
+      <div class="bar"></div>
+      <p class="lead">Rift Watch Gaming is a casual community that's active in and out of EVE Online. In EVE we fly as part of the wider Watchpoint group, focusing on combat, support and shared experiences.</p>
+      <p class="lead">We're friendly and social, with a high sec base, small gang PvP and plenty of teamwork. Pilots of every skill level are welcome, and our Discord is where it all comes together.</p>
+
+      <div class="grid g3" style="margin-top:34px">
+        <div class="panel hov rv">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+          <h3>Friendship First</h3>
+          <p>A community in game and out. It's about enjoying EVE with people you genuinely like flying with.</p>
+        </div>
+        <div class="panel hov rv">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 20l8-4 8 4-8-18Z"/></svg></div>
+          <h3>Small Fleet Specialists</h3>
+          <p>Small gang fleets where you can learn and practise every role. Great for new pilots and veterans alike.</p>
+        </div>
+        <div class="panel hov rv">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4M4 4h13l-2 4 2 4H4"/></svg></div>
+          <h3>Faction Warfare</h3>
+          <p>Mercenary roams for Gallente, Caldari or whoever needs us. We'll help new players get set up and their standings above zero.</p>
+        </div>
+        <div class="panel hov rv">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+          <h3>NPSI and Beyond</h3>
+          <p>We fly with NPSI communities for extra content: small gang, bigger fights, PvE and ISK making.</p>
+        </div>
+        <div class="panel hov rv">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l10-5 10 5-10 5L2 8Z"/><path d="M6 10.5V16c3 2.5 9 2.5 12 0v-5.5"/></svg></div>
+          <h3>Learn and Grow</h3>
+          <p>No elitism. We learn by doing, with mentors on hand to help you find your feet.</p>
+        </div>
+        <div class="panel hov rv">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></div>
+          <h3>Events and Play Times</h3>
+          <p>EU prime time fleets on Monday, Thursday and Sunday, roughly 18:00 to 22:30 EVE time, with casual play on other evenings.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="rv">
+      <p class="eyebrow">About us</p>
+      <h2>Small, tight knit<br>and up for anything</h2>
+      <div class="bar"></div>
+      <div class="grid g2">
+        <div class="panel rv">
+          <h3>RWG in general</h3>
+          <p>A small community of casual players who enjoy games, anime, movie nights, D&amp;D and just hanging out together on Discord.</p>
+        </div>
+        <div class="panel rv">
+          <h3>Our EVE community</h3>
+          <p>Formed in 2022, with around 7 to 10 pilots on most days plus friends, occasional flyers and alts. We range from our 20s to our 70s, mostly in Europe, with some in South Africa and a couple on US time. We're more of a close group of friends than a traditional corp.</p>
+        </div>
+        <div class="panel rv">
+          <h3>What we do in game</h3>
+          <p>Small gang PvP and Faction Warfare, plus fleet planning, fit testing and mentoring. We also dabble in escalations, wormholes, Abyssals and NPSI fleets, usually in a relaxed way on Discord.</p>
+        </div>
+        <div class="panel rv">
+          <h3>Who we're looking for</h3>
+          <p>Active, enthusiastic, social and relaxed pilots who'd rather be part of a smaller group than a number in a big one.</p>
+        </div>
+      </div>
+      <div class="panel rv" style="margin-top:18px">
+        <h3>When we play</h3>
+        <p>EU evenings, roughly 18:00 to 23:00 EVE time. These are our dedicated fleet nights:</p>
+        <div class="nights">
+          <span class="night">Monday<small>Corp fleet</small></span>
+          <span class="night">Thursday<small>Corp fleet</small></span>
+          <span class="night">Sunday<small>Corp fleet</small></span>
+        </div>
+        <p style="margin-top:14px">Every fleet is on the <a href="https://riftwatch-roam-report.onrender.com/calendar">Rift Watch fleet schedule</a>.</p>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="rv">
+      <p class="eyebrow">Dedication · Expertise · Passion</p>
+      <h2>The recruitment team</h2>
+      <div class="bar"></div>
+      <p class="lead">Got a question? Send any of us an in game EVE mail and we'll usually reply within 24 hours.</p>
+      <div class="grid g4" style="margin-top:28px">
+        <div class="panel hov person rv">
+          <img src="https://images.evetech.net/characters/664090846/portrait?size=256" alt="Bookmiester portrait" loading="lazy">
+          <h3>Bookmiester</h3>
+          <p class="role">CEO · Director</p>
+          <a class="mail" href="https://evewho.com/character/664090846" target="_blank" rel="noopener">View on EVE Who →</a>
+        </div>
+        <div class="panel hov person rv">
+          <img src="https://images.evetech.net/characters/2120311984/portrait?size=256" alt="Silencer-UK portrait" loading="lazy">
+          <h3>Silencer-UK</h3>
+          <p class="role">CFO · Director</p>
+          <a class="mail" href="https://evewho.com/character/2120311984" target="_blank" rel="noopener">View on EVE Who →</a>
+        </div>
+        <div class="panel hov person rv">
+          <img src="https://images.evetech.net/characters/513240319/portrait?size=256" alt="Xi 'xar portrait" loading="lazy">
+          <h3>Xi 'xar</h3>
+          <p class="role">Officer · Mentor</p>
+          <a class="mail" href="https://evewho.com/character/513240319" target="_blank" rel="noopener">View on EVE Who →</a>
+        </div>
+        <div class="panel hov person rv">
+          <img src="https://images.evetech.net/characters/94904079/portrait?size=256" alt="Sina Arran portrait" loading="lazy">
+          <h3>Sina Arran</h3>
+          <p class="role">Officer · Recruiter</p>
+          <a class="mail" href="https://evewho.com/character/94904079" target="_blank" rel="noopener">View on EVE Who →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plan -->
+    <section id="plan" class="rv">
+      <p class="eyebrow">So what's the plan?</p>
+      <h2>Where we're heading</h2>
+      <div class="bar"></div>
+      <div class="grid g2 steps">
+        <div class="panel rv"><h3>More spontaneous fleets</h3><p>Pick up content on the nights between our corp fleets.</p></div>
+        <div class="panel rv"><h3>Another regular corp night</h3><p>A fourth dedicated fleet night as we grow.</p></div>
+        <div class="panel rv"><h3>Role training and Bootcamps</h3><p>Sessions that teach each fleet role properly, from tackle to logi.</p></div>
+        <div class="panel rv"><h3>Fleet leadership</h3><p>Chances for senior pilots to step up and FC their own fleets.</p></div>
+      </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section id="tldr" class="rv">
+      <p class="eyebrow">The TL;DR</p>
+      <h2>In five lines</h2>
+      <div class="bar"></div>
+      <ul class="tldr">
+        <li>Pilots of all levels welcome, with mentoring for new players.</li>
+        <li>A social, supportive crew with a busy Discord.</li>
+        <li>Excited explorers with room to grow, not a "been there, done that" corp.</li>
+        <li>We're building something bigger, together.</li>
+        <li>PvP and team content first: Faction Warfare, small gang and NPSI.</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="rv">
+      <p class="eyebrow">FAQ</p>
+      <h2>Questions we get asked</h2>
+      <div class="bar"></div>
+      <details>
+        <summary>When do you play?</summary>
+        <p>Corp fleets run Monday, Thursday and Sunday. On other evenings there's spontaneous content and plenty going on in Discord. Weekends are usually quieter.</p>
+      </details>
+      <details>
+        <summary>What are your short and long term goals?</summary>
+        <p>Short term, recruit like minded pilots. Long term, build our skills in small gang PvP, Faction Warfare and group content while keeping the social feel we've got now.</p>
+      </details>
+      <details>
+        <summary>Do I need to join Discord?</summary>
+        <p>We strongly encourage it. Discord is the heart of the community, and members who didn't get involved there have struggled to settle in. Lurking is fine to start with.</p>
+        <p>We have a strict no toxicity policy.</p>
+      </details>
+      <details>
+        <summary>Why are you recruiting so few?</summary>
+        <p>Quality over quantity. We want to keep the close knit feel, and we may open up a wider intake later.</p>
+      </details>
+      <details>
+        <summary>What are you looking for?</summary>
+        <p>Social, active, friendly pilots who are happy on Discord, take a bit of initiative and have a "let's give it a shot" attitude. Mistakes are fine. That's how we all learn.</p>
+      </details>
+    </section>
+
+    <!-- Vacancies -->
+    <section id="vacancies" class="rv">
+      <p class="eyebrow">Vacancies</p>
+      <h2>Come fly with us</h2>
+      <div class="bar"></div>
+      <div class="grid g2">
+        <div class="panel hov vac rv">
+          <span class="tag hot">High priority</span>
+          <h3>General Players</h3>
+          <p>PvP ready, or willing to learn. Regular Faction Warfare roams, low sec and null sec skirmishes and NPSI fleets, all with no pressure.</p>
+          <span class="count">Open to everyone</span>
+        </div>
+        <div class="panel hov vac rv">
+          <span class="tag">2 pilots</span>
+          <h3>Content Leaders and Creators</h3>
+          <p>Form up and run small gang and Faction Warfare content. FC experience is welcome, but we'll help you learn.</p>
+          <span class="count">2 places</span>
+        </div>
+        <div class="panel hov vac rv">
+          <span class="tag">1 pilot</span>
+          <h3>Mentors</h3>
+          <p>Lead Bootcamp style training fleets to help our newer pilots find their feet.</p>
+          <span class="count">1 place</span>
+        </div>
+        <div class="panel hov vac rv">
+          <span class="tag">1 pilot</span>
+          <h3>Specialist: Wolf Rayet</h3>
+          <p>Wormhole experience needed, to lead and prepare our Wolf Rayet content.</p>
+          <span class="count">1 place</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apply -->
+    <section id="apply" class="rv">
+      <div class="panel apply">
+        <p class="eyebrow">Apply to join</p>
+        <h2>Ready to undock?</h2>
+        <div class="bar" style="margin-left:auto;margin-right:auto"></div>
+        <p class="lead">Fill in the recruitment questionnaire and one of the team will be in touch, usually within 24 hours. Or just send any recruiter an EVE mail.</p>
+        <div class="cta">
+          <a class="btn solid" href="https://riftwatchgaming.wixsite.com/rwgeve/apply" target="_blank" rel="noopener">Recruitment questionnaire →</a>
+          <a class="btn" href="https://forms.gle/TiNKufrvH8MvUuML8" target="_blank" rel="noopener">Contact form</a>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:18px">
+        <a class="panel hov raf rv" href="https://www.eveonline.com/signup?invc=0417abf8-2554-4ea4-a801-5d3ac6c75ca2" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+          <span class="big">1M SP</span>
+          <span><h3>Free skill points</h3><p>New to EVE? Sign up with our recruit a friend link for 1 million free skill points. It works on older characters too.</p></span>
+        </a>
+        <div class="panel rv">
+          <h3>Check us out</h3>
+          <p>See what we've been up to before you apply.</p>
+          <div class="cta" style="margin-top:16px">
+            <a class="btn ghost" href="https://zkillboard.com/corporation/98725367/" target="_blank" rel="noopener">Killboard</a>
+            <a class="btn ghost" href="https://evewho.com/corporation/98725367" target="_blank" rel="noopener">EVE Who</a>
+            <a class="btn ghost" href="https://riftwatch-roam-report.onrender.com/fleets">Xar Reports</a>
+            <a class="btn ghost" href="https://riftwatch-roam-report.onrender.com/doctrines/">Doctrines</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><a href="index.html">Rift Watch home</a><a href="#apply">Apply</a><a href="https://riftwatch-roam-report.onrender.com/calendar">Fleet Schedule</a></div>
+    <p style="margin-top:10px">© YC128 Rift Watch Gaming · Created by Xarasier Deninard · EVE Online © CCP Games</p>
+  </footer>
+
+  <script>
+    // Fade sections in as you scroll, and light up the matching link in the top bar.
+    (function () {
+      var els = document.querySelectorAll('.rv');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (list) {
+        list.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+      }, { threshold: 0.08 });
+      els.forEach(function (e) { io.observe(e); });
+
+      var links = document.querySelectorAll('.links a');
+      var spy = new IntersectionObserver(function (list) {
+        list.forEach(function (x) {
+          if (!x.isIntersecting) return;
+          links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + x.target.id); });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
+    })();
+  </script>
+</body>
+</html>

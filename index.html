@@ -68,6 +68,13 @@
     .head .eyebrow, .card .eyebrow { color: var(--accent); }
     .eyebrow { margin-top: 14px; font-weight: 600; font-size: .9rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
     .head p { margin-top: 8px; color: var(--muted); }
+    .join { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; padding: 9px 16px; border-radius: 999px;
+      text-decoration: none; color: var(--text); font-size: .92rem; border: 1px solid rgba(232,163,60,.55); background: rgba(232,163,60,.12);
+      transition: background .15s, border-color .15s; }
+    .join b { color: var(--accent-2); }
+    .join:hover, .join:focus-visible { background: rgba(232,163,60,.22); border-color: var(--accent); outline: none; }
+    .join span { transition: transform .2s; }
+    .join:hover span { transform: translateX(4px); }
 
     .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 400px)); gap: 22px; width: 100%; justify-content: center; }
     .card {
@@ -172,10 +179,11 @@
       </picture>
       <p class="eyebrow">Rift Watch</p>
       <p>Pick where you're heading.</p>
+      <a class="join" href="join.html">New here? <b>Join Rift Watch</b> <span>→</span></a>
     </div>
 
     <div class="cards">
-      <a class="card" href="https://doctrine-li9g.onrender.com/">
+      <a class="card" href="https://riftwatch-roam-report.onrender.com/doctrines/">
         <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
         <p class="eyebrow">Rift Watch</p>
         <h2>Fleet<br>Doctrines</h2>
@@ -201,7 +209,7 @@
       </a>
     </div>
 
-    <p class="note">Doctrines and the schedule can take a moment to load if nobody has used them for a while.</p>
+    <p class="note">Doctrines, the schedule and reports can take a moment to load if nobody has used them for a while.</p>
   </main>
 
   <!-- Theme music. Put the track next to this page as theme.mp3 (or change src). -->
@@ -321,7 +329,7 @@
 
     // Nudge the doctrine and reports sites awake (free Render plan sleeps after 15 minutes idle),
     // so it's ready by the time someone clicks its card.
-    ['https://doctrine-li9g.onrender.com/', 'https://riftwatch-roam-report.onrender.com/'].forEach(function (u) {
+    ['https://riftwatch-roam-report.onrender.com/'].forEach(function (u) {
       try { fetch(u, { mode: 'no-cors', cache: 'no-store' }).catch(function () {}); } catch (e) {}
     });
   </script>
